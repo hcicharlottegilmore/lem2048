@@ -409,18 +409,18 @@ class MainWindow(QWidget):
         self.main_layout.setStretchFactor(self.map_label, 1)
         self.main_layout.setStretchFactor(self.right_panel, 1)
 
-        # Next Button
-        self.next_button = QPushButton("NEXT")
-        self.next_button.setStyleSheet("background-color: white; color: blue; font-size: 60px;")
-        self.next_button.setFixedHeight(80)  # Set button height
-        self.next_button.clicked.connect(self.next_map)
+        # # Next Button
+        # self.next_button = QPushButton("NEXT")
+        # self.next_button.setStyleSheet("background-color: white; color: blue; font-size: 60px;")
+        # self.next_button.setFixedHeight(80)  # Set button height
+        # self.next_button.clicked.connect(self.next_map)
 
-        # Bottom Layout (Next Button)
-        self.bottom_layout = QVBoxLayout()
-        self.bottom_layout.addLayout(self.main_layout)
-        self.bottom_layout.addWidget(self.next_button, alignment=Qt.AlignmentFlag.AlignCenter)
+        # # Bottom Layout (Next Button)
+        # self.bottom_layout = QVBoxLayout()
+        # self.bottom_layout.addLayout(self.main_layout)
+        # self.bottom_layout.addWidget(self.next_button, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        self.setLayout(self.bottom_layout)
+        # self.setLayout(self.bottom_layout)
 
     def load_map(self):
         """Loads the current map into the left-side QLabel and scales dynamically."""
@@ -448,10 +448,27 @@ class MainWindow(QWidget):
         else:
             self.showFullScreen()
 
+    # def keyPressEvent(self, event):
+    #     """Handles arrow key input for 2048 game movement."""
+    #     if self.right_panel.currentWidget() == self.game_widget:
+    #         key = event.key()
+    #         if key == Qt.Key.Key_Left:
+    #             self.game_widget.move("left")
+    #         elif key == Qt.Key.Key_Right:
+    #             self.game_widget.move("right")
+    #         elif key == Qt.Key.Key_Up:
+    #             self.game_widget.move("up")
+    #         elif key == Qt.Key.Key_Down:
+    #             self.game_widget.move("down")
+
+
     def keyPressEvent(self, event):
-        """Handles arrow key input for 2048 game movement."""
-        if self.right_panel.currentWidget() == self.game_widget:
-            key = event.key()
+        """Handles arrow key input for 2048 game movement and space bar for next map."""
+        key = event.key()
+
+        if key == Qt.Key.Key_Space:  # Space bar to switch maps
+            self.next_map()
+        elif self.right_panel.currentWidget() == self.game_widget:
             if key == Qt.Key.Key_Left:
                 self.game_widget.move("left")
             elif key == Qt.Key.Key_Right:
@@ -460,6 +477,7 @@ class MainWindow(QWidget):
                 self.game_widget.move("up")
             elif key == Qt.Key.Key_Down:
                 self.game_widget.move("down")
+
 
     def resizeEvent(self, event):
         """Resize elements dynamically when the window is resized."""
