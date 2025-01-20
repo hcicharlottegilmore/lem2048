@@ -1,19 +1,19 @@
+
+
 import sys
 import os
 import random
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QStackedWidget
+from PyQt6.QtWidgets import (
+    QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QStackedWidget
+)
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 
-# 2048 Game Grid Class
+# 2048 Game Grid
 class Grid:
     def __init__(self, size=4):
         self.size = size
         self.cells = self.generate_empty_grid()
-        self.compressed = False
-        self.merged = False
-        self.moved = False
-        self.current_score = 0
         self.add_random_tile()
         self.add_random_tile()
 
@@ -27,16 +27,33 @@ class Grid:
             self.cells[i][j] = 2 if random.random() < 0.9 else 4
 
     def move_left(self):
-        self.compressed, self.merged, self.moved = False, False, False
         for row in self.cells:
             self.compress(row)
             self.merge(row)
             self.compress(row)
+        self.add_random_tile()
+
+    def move_right(self):
+        for row in self.cells:
+            row.reverse()
+            self.compress(row)
+            self.merge(row)
+            self.compress(row)
+            row.reverse()
+        self.add_random_tile()
+
+    def move_up(self):
+        self.transpose()
+        self.move_left()
+        self.transpose()
+
+    def move_down(self):
+        self.transpose()
+        self.move_right()
+        self.transpose()
 
     def compress(self, row):
         new_row = [num for num in row if num != 0] + [0] * (self.size - len([num for num in row if num != 0]))
-        if new_row != row:
-            self.compressed = True
         row[:] = new_row
 
     def merge(self, row):
@@ -44,8 +61,9 @@ class Grid:
             if row[i] == row[i + 1] and row[i] != 0:
                 row[i] *= 2
                 row[i + 1] = 0
-                self.current_score += row[i]
-                self.merged = True
+
+    def transpose(self):
+        self.cells = [list(row) for row in zip(*self.cells)]
 
 # 2048 Game Widget
 class GameWidget(QWidget):
@@ -62,7 +80,7 @@ class GameWidget(QWidget):
             row_layout = QHBoxLayout()
             for label in row:
                 label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-                label.setFixedSize(80, 80)
+                label.setFixedSize(100, 100)
                 row_layout.addWidget(label)
             self.layout.addLayout(row_layout)
         self.update_grid()
@@ -82,6 +100,19 @@ class GameWidget(QWidget):
         }
         return colors.get(value, "#3c3a32")
 
+    def keyPressEvent(self, event):
+        """Handle arrow key input for game movement"""
+        key = event.key()
+        if key == Qt.Key.Key_Left:
+            self.grid.move_left()
+        elif key == Qt.Key.Key_Right:
+            self.grid.move_right()
+        elif key == Qt.Key.Key_Up:
+            self.grid.move_up()
+        elif key == Qt.Key.Key_Down:
+            self.grid.move_down()
+        self.update_grid()
+
 # Main Application Window
 class MainWindow(QWidget):
     def __init__(self):
@@ -98,22 +129,22 @@ class MainWindow(QWidget):
         # Main Layouts
         self.main_layout = QHBoxLayout(self)
 
-        # Left Panel (Stacked Widget for 2048 or Blank)
-        self.left_panel = QStackedWidget()
-        self.game_widget = GameWidget()  # 2048 Game
-        self.blank_widget = QLabel(" ")
-        self.blank_widget.setStyleSheet("background-color: white;")
-        self.left_panel.addWidget(self.game_widget)
-        self.left_panel.addWidget(self.blank_widget)
-
-        # Right Panel (Map Display)
+        # Left Panel (Map Display)
         self.map_label = QLabel()
         self.map_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.load_map()
 
+        # Right Panel (Stacked Widget for 2048 or Blank)
+        self.right_panel = QStackedWidget()
+        self.game_widget = GameWidget()  # 2048 Game
+        self.blank_widget = QLabel(" ")
+        self.blank_widget.setStyleSheet("background-color: white;")
+        self.right_panel.addWidget(self.game_widget)
+        self.right_panel.addWidget(self.blank_widget)
+
         # Add to Main Layout
-        self.main_layout.addWidget(self.left_panel, 1)
-        self.main_layout.addWidget(self.map_label, 2)
+        self.main_layout.addWidget(self.map_label, 2)  # Map on Left
+        self.main_layout.addWidget(self.right_panel, 1)  # Game on Right
 
         # Buttons Layout
         self.buttons_layout = QHBoxLayout()
@@ -138,7 +169,7 @@ class MainWindow(QWidget):
         self.fullscreen_button.clicked.connect(self.toggle_fullscreen)
 
     def load_map(self):
-        """Loads the current map into the right-side QLabel."""
+        """Loads the current map into the left-side QLabel."""
         if self.maps:
             pixmap = QPixmap(self.maps[self.current_index])
             self.map_label.setPixmap(pixmap.scaled(self.map_label.width(), self.map_label.height(), Qt.AspectRatioMode.KeepAspectRatio))
@@ -158,9 +189,9 @@ class MainWindow(QWidget):
     def toggle_2048(self):
         """Shows 2048 on every other map, otherwise shows a blank screen."""
         if self.current_index % 2 == 0:
-            self.left_panel.setCurrentWidget(self.game_widget)
+            self.right_panel.setCurrentWidget(self.game_widget)
         else:
-            self.left_panel.setCurrentWidget(self.blank_widget)
+            self.right_panel.setCurrentWidget(self.blank_widget)
 
     def toggle_fullscreen(self):
         """Toggles fullscreen mode."""
@@ -175,3 +206,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
+
