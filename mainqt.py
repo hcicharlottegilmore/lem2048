@@ -141,35 +141,11 @@ class MainWindow(QWidget):
         # Right Panel (Stacked Widget for 2048, Blank, Welcome, and Thank You Screens)
         self.right_panel = QStackedWidget()
 
-#         # Welcome Screen
-#         self.welcome_screen = QLabel("Welcome! 
-
-# In this experiment, you are the SPEAKER, and your partner the LISTENER. You will be shown a series of maps as well as a 2048 game, playable only during select portions of the experiment. Your objective is to successfully complete both the map direction task and the game task.
-
-# In the MAP DIRECTION TASK, you will be conversing with you partner to guide them to a specified point on the map. You are both given maps of the same locations, with some slight differences. You will need to communicate with your partner, posing and answering questions, to help them reach the designated ending point. 
-
-# In the 2048 GAME TASK, your goal is to combine numbered tiles to combine them into the tile 2048. Use the arrow keys (← ↑ → ↓) to slide all tiles in the chosen direction. When two tiles with the same number collide while moving, they merge into one tile with a value equal to their sum. Each move introduces a new tile (either "2" or "4") at a random empty position on the board.
-
-# To start, please press space. When you are ready to move onto the next map, press space. ")
-#         self.welcome_screen.setAlignment(Qt.AlignmentFlag.AlignCenter)
-#         self.welcome_screen.setStyleSheet("background-color: white; font-size: 60px; color: black;")
-#         self.right_panel.addWidget(self.welcome_screen)
-
-    # Welcome Screen
-        self.welcome_screen = QLabel("""Welcome! 
-
-            In this experiment, you are the SPEAKER, and your partner the LISTENER. You will be shown a series of maps as well as a 2048 game, playable only during select portions of the experiment. Your objective is to successfully complete both the map direction task and the game task.
-
-            In the MAP DIRECTION TASK, you will be conversing with your partner to guide them to a specified point on the map. You are both given maps of the same locations, with some slight differences. You will need to communicate with your partner, posing and answering questions, to help them reach the designated ending point. 
-
-            In the 2048 GAME TASK, your goal is to combine numbered tiles to create the tile 2048. Use the arrow keys (← ↑ → ↓) to slide all tiles in the chosen direction. When two tiles with the same number collide while moving, they merge into one tile with a value equal to their sum. Each move introduces a new tile (either "2" or "4") at a random empty position on the board.
-
-            To start, please press space. When you are ready to move onto the next map, press space.
-            """)
+        # Welcome Screen
+        self.welcome_screen = QLabel("WELCOME")
         self.welcome_screen.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.welcome_screen.setStyleSheet("background-color: white; font-size: 30px; color: black;")
+        self.welcome_screen.setStyleSheet("background-color: white; font-size: 60px; color: black;")
         self.right_panel.addWidget(self.welcome_screen)
-
 
         # 2048 Game Screen
         self.game_widget = GameWidget()
