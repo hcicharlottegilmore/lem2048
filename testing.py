@@ -158,17 +158,30 @@ class MainWindow(QWidget):
         # Right Panel (Stacked Widget for Pages)
         self.right_panel = QStackedWidget()
 
-        # Create Pages
+        # # Create Pages
+        # self.pages = [
+        #     QLabel("WELCOME\nPress SPACE to continue"),
+        #     QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
+        #     QLabel("NEW PAGE 1"),  # First additional page
+        #     QLabel("NEW PAGE 2"),
+        #     QLabel(),  # Placeholder for 2048 image
+        #     QLabel("START PAGE\nPress SPACE to begin"),
+        #     GameWidget(),  # The 2048 game
+        #     QLabel("THANK YOU\nExperiment completed!")
+        # ]
+
+
         self.pages = [
             QLabel("WELCOME\nPress SPACE to continue"),
             QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
-            QLabel("NEW PAGE 1"),  # First additional page
+            QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
             QLabel("NEW PAGE 2"),
-            QLabel(),  # Placeholder for 2048 image
+            QLabel(),  # Placeholder for 2048 image (Move it up)
             QLabel("START PAGE\nPress SPACE to begin"),
             GameWidget(),  # The 2048 game
             QLabel("THANK YOU\nExperiment completed!")
         ]
+
 
         # Format pages
         for page in self.pages:
@@ -178,7 +191,7 @@ class MainWindow(QWidget):
             self.right_panel.addWidget(page)
 
         # Load 2048 Image Page
-        self.pages[2].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
+        self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
 
         # Add to Main Layout
         self.main_layout.addWidget(self.map_label, 2)  # Map on Left
@@ -317,9 +330,50 @@ class MainWindow(QWidget):
     #             self.pages[4].move("down")
 
 
+
+
+    def previous_screen(self):
+        """Handles going back to the previous page when 'Q' is pressed."""
+        current_widget = self.right_panel.currentWidget()
+
+        if current_widget == self.pages[0]:  # Already on the first page (Welcome)
+            return  # Do nothing, can't go back from Welcome
+
+        elif current_widget == self.pages[1]:  # Detailed Instructions -> Welcome
+            self.right_panel.setCurrentWidget(self.pages[0])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[2]:  # 2048 Image -> Detailed Instructions
+            self.right_panel.setCurrentWidget(self.pages[1])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[3]:  # New Page 1 -> 2048 Image
+            self.right_panel.setCurrentWidget(self.pages[2])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[4]:  # New Page 2 -> New Page 1
+            self.right_panel.setCurrentWidget(self.pages[3])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[5]:  # Start Page -> New Page 2
+            self.right_panel.setCurrentWidget(self.pages[4])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[6]:  # 2048 Game -> Start Page
+            self.right_panel.setCurrentWidget(self.pages[5])
+            self.set_fullscreen_layout()
+
+        elif current_widget == self.pages[7]:  # Thank You -> Last 2048 Game Page
+            self.right_panel.setCurrentWidget(self.pages[6])
+            self.set_split_layout()
+
+
+
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Space:
             self.next_screen()
+        elif event.key() == Qt.Key.Key_Q:
+            self.previous_screen()
         elif self.right_panel.currentWidget() == self.pages[6]:  # 2048 Game Page
             if event.key() == Qt.Key.Key_Left:
                 self.pages[6].move("left")
