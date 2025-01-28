@@ -1,6 +1,4 @@
 
-
-
 import sys
 import os
 import random
@@ -158,29 +156,45 @@ class MainWindow(QWidget):
         # Right Panel (Stacked Widget for Pages)
         self.right_panel = QStackedWidget()
 
-        # # Create Pages
+
         # self.pages = [
-        #     QLabel("WELCOME\nPress SPACE to continue"),
+        #     QLabel("WELCOME\nIn this experiment, you are the LISTENER, and your partner the SPEAKER. You will be shown a series of maps adjacent to a 2048 game. This game is playable only during select portions of the study. Your objective is to successfully complete both the MAP TASK and the GAME TASK.\Please press space to continue."),
         #     QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
-        #     QLabel("NEW PAGE 1"),  # First additional page
+        #     QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
         #     QLabel("NEW PAGE 2"),
-        #     QLabel(),  # Placeholder for 2048 image
+        #     QLabel(),  # Placeholder for 2048 image (Move it up)
         #     QLabel("START PAGE\nPress SPACE to begin"),
         #     GameWidget(),  # The 2048 game
         #     QLabel("THANK YOU\nExperiment completed!")
         # ]
 
-
         self.pages = [
             QLabel("WELCOME\nPress SPACE to continue"),
-            QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
-            QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
-            QLabel("NEW PAGE 2"),
+            
+            QLabel("In this experiment, you are the LISTENER, and your partner the SPEAKER. "
+                "You will be shown a series of maps adjacent to a 2048 game. "
+                "This game is playable only during select portions of the study. "
+                "Your objective is to successfully complete both the MAP TASK and the GAME TASK.\n\n"
+                "Please press space to continue."),
+            
+            QLabel("In the MAP TASK, you will be conversing with your partner, who will give you directions to a specified point on the map. "
+                "You are both given maps of the same locations, with some slight differences. "
+                "You will need to communicate with your partner to understand how to reach the destination point.\n\n"
+                "Please press space to continue."),
+            
+            QLabel("In the 2048 GAME TASK, your goal is to combine numbered tiles to create the tile 2048. "
+                "Use the arrow keys (← ↑ → ↓) to slide all tiles in the chosen direction. "
+                "When two tiles with the same number collide, they merge into one tile with a value equal to their sum. "
+                "Each move introduces a new tile (either '2' or '4') at a random empty position on the board. "
+                "An example will be provided.\n\n"
+                "Please press space to continue."),
+            
             QLabel(),  # Placeholder for 2048 image (Move it up)
             QLabel("START PAGE\nPress SPACE to begin"),
             GameWidget(),  # The 2048 game
             QLabel("THANK YOU\nExperiment completed!")
         ]
+
 
 
         # Format pages
@@ -211,14 +225,6 @@ class MainWindow(QWidget):
             self.map_label.setPixmap(pixmap.scaled(
                 self.map_label.size(), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
 
-    # def toggle_overlay(self):
-    #     """Toggles the overlay for maps 2 and 4 only."""
-    #     if self.current_index in [1, 3]:  # Maps are zero-indexed, so 2nd and 4th maps are at index 1 and 3
-    #         self.pages[4].overlay.show()
-    #         self.pages[4].overlay.raise_()  # Bring overlay to the front
-    #     else:
-    #         self.pages[4].overlay.hide()
-
     def toggle_overlay(self):
         """Toggles the overlay for maps 2 and 4 only."""
         if isinstance(self.pages[6], GameWidget):  # Ensure it's the game widget
@@ -238,40 +244,6 @@ class MainWindow(QWidget):
         """Ensures a 50-50 screen split for the map and 2048 game pages."""
         self.main_layout.setStretchFactor(self.map_label, 1)  # Map takes half
         self.main_layout.setStretchFactor(self.right_panel, 1)  # Right panel takes half
-
-    # def next_screen(self):
-    #     """Handles the transitions through pages and ensures layout adapts properly."""
-    #     current_widget = self.right_panel.currentWidget()
-
-    #     if current_widget == self.pages[0]:  # Welcome -> Detailed Instructions
-    #         self.right_panel.setCurrentWidget(self.pages[1])
-    #         self.set_fullscreen_layout()
-
-    #     elif current_widget == self.pages[1]:  # Instructions -> 2048 Image
-    #         self.right_panel.setCurrentWidget(self.pages[2])
-    #         self.set_fullscreen_layout()
-
-    #     elif current_widget == self.pages[2]:  # 2048 Image -> Start Page
-    #         self.right_panel.setCurrentWidget(self.pages[3])
-    #         self.set_fullscreen_layout()
-
-    #     elif current_widget == self.pages[3]:  # Start Page -> Experiment (Maps + 2048)
-    #         self.current_index = 0  # Move to first map
-    #         self.load_map()
-    #         self.right_panel.setCurrentWidget(self.pages[4])
-    #         self.map_label.show()
-    #         self.set_split_layout()
-    #         self.toggle_overlay()
-
-    #     elif self.current_index < len(self.maps) - 1:  # Map cycle
-    #         self.current_index += 1
-    #         self.load_map()
-    #         self.toggle_overlay()
-
-    #     else:  # Last map -> Thank You Screen
-    #         self.right_panel.setCurrentWidget(self.pages[5])
-    #         self.map_label.hide()
-    #         self.set_fullscreen_layout()
 
     def next_screen(self):
         """Handles the transitions through pages and ensures layout adapts properly."""
@@ -314,21 +286,6 @@ class MainWindow(QWidget):
             self.right_panel.setCurrentWidget(self.pages[7])
             self.map_label.hide()
             self.set_fullscreen_layout()
-
-
-    # def keyPressEvent(self, event):
-    #     if event.key() == Qt.Key.Key_Space:
-    #         self.next_screen()
-    #     elif self.right_panel.currentWidget() == self.pages[4]:
-    #         if event.key() == Qt.Key.Key_Left:
-    #             self.pages[4].move("left")
-    #         elif event.key() == Qt.Key.Key_Right:
-    #             self.pages[4].move("right")
-    #         elif event.key() == Qt.Key.Key_Up:
-    #             self.pages[4].move("up")
-    #         elif event.key() == Qt.Key.Key_Down:
-    #             self.pages[4].move("down")
-
 
 
 
