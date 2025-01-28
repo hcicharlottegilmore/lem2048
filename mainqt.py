@@ -474,6 +474,23 @@ class MainWindow(QWidget):
         else:
             self.pages[4].overlay.hide()
 
+    # def next_screen(self):
+    #     """Handles screen transitions and updates layout properly."""
+    #     if self.current_index == -1:  # Start from welcome screen
+    #         self.current_index = 0
+    #         self.load_map()
+    #         self.right_panel.setCurrentWidget(self.pages[4])
+    #         self.map_label.show()
+    #         self.toggle_overlay()
+    #     elif self.current_index < len(self.maps) - 1:
+    #         self.current_index += 1
+    #         self.load_map()
+    #         self.toggle_overlay()
+    #     else:  # Last map -> Thank You Screen
+            self.right_panel.setCurrentWidget(self.pages[5])
+            self.map_label.hide()
+ 
+
     def next_screen(self):
         """Handles screen transitions and updates layout properly."""
         if self.current_index == -1:  # Start from welcome screen
@@ -487,8 +504,7 @@ class MainWindow(QWidget):
             self.load_map()
             self.toggle_overlay()
         else:  # Last map -> Thank You Screen
-            self.right_panel.setCurrentWidget(self.pages[5])
-            self.map_label.hide()
+
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Space:
