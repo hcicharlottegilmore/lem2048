@@ -153,7 +153,7 @@ class MainWindow(QWidget):
         self.map_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.map_label.setStyleSheet("background-color: white;")
 
-        # Right Panel (Stacked Widget for Pages)
+        # Right Panel (Stacked Widget for 2048 showing/ non showing)
         self.right_panel = QStackedWidget()
 
 
@@ -181,13 +181,13 @@ class MainWindow(QWidget):
 
         # Add to Main Layout
         self.main_layout.addWidget(self.map_label, 2)  # Map on Left
-        self.main_layout.addWidget(self.right_panel, 1)  # Pages on Right
+        self.main_layout.addWidget(self.right_panel, 1)  # game on Right
 
         # Start with welcome screen
         self.right_panel.setCurrentWidget(self.pages[0])
         self.map_label.hide()  # Hide the map at the start
 
-        # Load first map (Fix for AttributeError)
+        # Load first map 
         self.load_map()
 
     def load_map(self):
@@ -200,7 +200,7 @@ class MainWindow(QWidget):
     def toggle_overlay(self):
         """Toggles the overlay for maps 2 and 4 only."""
         if isinstance(self.pages[6], GameWidget):  # Ensure it's the game widget
-            if self.current_index in [1, 3]:  # Maps are zero-indexed, so 2nd and 4th maps are at index 1 and 3
+            if self.current_index in [1, 3]:  # Maps are zero-indexed
                 self.pages[6].overlay.show()
                 self.pages[6].overlay.raise_()  # Bring overlay to the front
             else:
