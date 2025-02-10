@@ -2,7 +2,7 @@
 //
 // This file is part of the QtCore Python extension module.
 //
-// Copyright (c) 2024 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2025 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of PyQt6.
 // 
@@ -44,7 +44,7 @@
 %Feature PyQt_Vulkan
 
 %Copying
-Copyright (c) 2024 Riverbank Computing Limited <info@riverbankcomputing.com>
+Copyright (c) 2025 Riverbank Computing Limited <info@riverbankcomputing.com>
 
 This file is part of PyQt6.
 
@@ -76,8 +76,8 @@ int PYQT_VERSION;
 const char *PYQT_VERSION_STR;
 
 %ModuleCode
-static int PYQT_VERSION = 0x060800;
-static const char *PYQT_VERSION_STR = "6.8.0";
+static int PYQT_VERSION = 0x060801;
+static const char *PYQT_VERSION_STR = "6.8.1";
 %End
 
 %Include qglobal.sip
