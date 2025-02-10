@@ -1,4 +1,3 @@
-
 import sys
 import os
 import random
@@ -190,12 +189,25 @@ class MainWindow(QWidget):
         # Load 2048 Image Page
         #self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
 
-        self.pages[1].setPixmap(QPixmap("detailed_instructions.png").scaled(
+        self.pages[1].setPixmap(QPixmap("instructions.png").scaled(
             self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
         ))
         self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
 
+
+        self.pages[2].setPixmap(QPixmap("map_task.png").scaled(
+            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
+        ))
+        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+
+        self.pages[3].setPixmap(QPixmap("game_task.png").scaled(
+            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
+        ))
+        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
 
 
 
