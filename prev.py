@@ -156,27 +156,16 @@ class MainWindow(QWidget):
         self.right_panel = QStackedWidget()
 
 
-        # self.pages = [
-        #     QLabel("WELCOME\nPress SPACE to continue"),
-        #     QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
-        #     QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
-        #     QLabel("NEW PAGE 2"),
-        #     QLabel(),  # Placeholder for 2048 image (Move it up)
-        #     QLabel("START PAGE\nPress SPACE to begin"),
-        #     GameWidget(),  # The 2048 game
-        #     QLabel("THANK YOU\nExperiment completed!")
-        # ]
         self.pages = [
-            QLabel("WELCOME\nPress SPACE to continue"),  # Keep text for the welcome page
-            QLabel(),  # Placeholder for Detailed Instructions Image
-            QLabel(),  # Placeholder for New Page 1 Image
-            QLabel(),  # Placeholder for New Page 2 Image
-            QLabel(),  # Placeholder for 2048 Image
+            QLabel("WELCOME\nPress SPACE to continue"),
+            QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
+            QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
+            QLabel("NEW PAGE 2"),
+            QLabel(),  # Placeholder for 2048 image (Move it up)
             QLabel("START PAGE\nPress SPACE to begin"),
             GameWidget(),  # The 2048 game
             QLabel("THANK YOU\nExperiment completed!")
         ]
-
 
 
         # Format pages
@@ -187,38 +176,7 @@ class MainWindow(QWidget):
             self.right_panel.addWidget(page)
 
         # Load 2048 Image Page
-        #self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
-
-        self.pages[1].setPixmap(QPixmap("instructions.png").scaled(
-            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-
-        self.pages[2].setPixmap(QPixmap("map_task.png").scaled(
-            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-
-        self.pages[3].setPixmap(QPixmap("game_task.png").scaled(
-            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-
-
-
-
-        self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(
-            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
-
+        self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
 
         # Add to Main Layout
         self.main_layout.addWidget(self.map_label, 2)  # Map on Left
