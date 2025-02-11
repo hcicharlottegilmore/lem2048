@@ -158,7 +158,9 @@ class MainWindow(QWidget):
 
         self.pages = [
             QLabel("WELCOME\nPress SPACE to continue"),
-            QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
+            #QLabel("DETAILED INSTRUCTIONS\n(Read badly)"),
+            #QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER"),
+            QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER \nYou will be shown a series of maps adjacent to a 2048 game.\nThis game is playable only during select \nportions of the study.\nYour objective is to successfully complete \nboth the MAP TASK and the GAME TASK. \nPlease press space to continue."),
             QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
             QLabel("NEW PAGE 2"),
             QLabel(),  # Placeholder for 2048 image (Move it up)
