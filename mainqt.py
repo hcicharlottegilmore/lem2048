@@ -1,4 +1,3 @@
-
 import sys
 import os
 import random
@@ -178,12 +177,9 @@ class MainWindow(QWidget):
 
         # Load 2048 Image Page
         #self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio))
+        self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatio))
 
-        self.pages[4].setPixmap(QPixmap("2048_image.png").scaled(
-            self.width(), self.height(), Qt.AspectRatioMode.KeepAspectRatioByExpanding, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.pages[4].setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.pages[4].setAlignment(Qt.AlignmentFlag.AlignCenter)
+
 
 
         # Add to Main Layout
