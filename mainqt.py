@@ -156,11 +156,32 @@ class MainWindow(QWidget):
         self.right_panel = QStackedWidget()
 
 
+        # WITHOUT FULL INST, GOOD SPLIT
+        # self.pages = [
+        #     QLabel("WELCOME\nPress SPACE to continue"),
+        #     #QLabel("DETAILED INSTRUCTIONS\n(Read badly)"),
+        #     #QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER"),
+        #     QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER \nYou will be shown a series of maps adjacent to a 2048 game.\nThis game is playable only during select \nportions of the study.\nYour objective is to successfully complete \nboth the MAP TASK and the GAME TASK. \nPlease press space to continue."),
+        #     QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
+        #     #QLabel("In the MAP TASK, you will be conversing with your partner, \nwho will give you directions to a specified point on the map. \nYou are both given maps of the same locations, \nwith some slight differences. \nYou will need to communicate with your partner \nto understand how to reach the destination point. \nPlease press space to continue. "),
+        #     QLabel("NEW PAGE 2"),
+        #     #QLabel("In the 2048 GAME TASK, your goal is \nto combine numbered tiles to create the tile 2048. \nUse the arrow keys (← ↑ → ↓) to slide \nall tiles in the chosen direction. When two tiles \nwith the same number collide, they \nmerge into one tile with a value equal to their sum. \nEach move introduces a new tile (either 2 or 4) \nat a random empty position on the board. An example will be provided. \nPlease press space to continue. "),
+        #     QLabel(),  # Placeholder for 2048 image (Move it up)
+        #     QLabel("START PAGE\nPress SPACE to begin"),
+        #     GameWidget(),  # The 2048 game
+        #     QLabel("THANK YOU\nExperiment completed!")
+        # ]
+
+        # WITH FULL INST, BAD SPLIT
         self.pages = [
             QLabel("WELCOME\nPress SPACE to continue"),
-            QLabel("DETAILED INSTRUCTIONS\n(Read carefully)"),
-            QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
-            QLabel("NEW PAGE 2"),
+            #QLabel("DETAILED INSTRUCTIONS\n(Read badly)"),
+            #QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER"),
+            QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER \nYou will be shown a series of maps adjacent to a 2048 game.\nThis game is playable only during select \nportions of the study.\nYour objective is to successfully complete \nboth the MAP TASK and the GAME TASK. \nPlease press space to continue."),
+            #QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
+            QLabel("In the MAP TASK, you will be conversing \nwith your partner, who will give you directions \nto a specified point on the map. \nYou are both given maps of the same locations, \nwith some slight differences. \nYou will need to communicate with your partner \nto understand how to reach the destination point. \nPlease press space to continue. "),
+            #QLabel("NEW PAGE 2"),
+            QLabel("In the 2048 GAME TASK, your goal is \nto combine numbered tiles to create \nthe tile 2048. Use the arrow keys (← ↑ → ↓) \nto slide all tiles in the chosen direction. \nWhen two tiles with the same number \ncollide, they merge into one tile \nwith a value equal to their sum. \nEach move introduces a new tile (either 2 or 4) \nat a random empty position on the board. \nAn example will be provided. \nPlease press space to continue. "),
             QLabel(),  # Placeholder for 2048 image (Move it up)
             QLabel("START PAGE\nPress SPACE to begin"),
             GameWidget(),  # The 2048 game
