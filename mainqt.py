@@ -212,7 +212,12 @@ class MainWindow(QWidget):
         self.map_label.hide()  # Hide the map at the start
 
         # Load first map 
-        self.load_map()
+      #  self.load_map()
+   
+    def showEvent(self, event):
+        super().showEvent(event)
+        if self.current_index == 0 and self.map_label.pixmap() is None:
+            self.load_map()
 
     def load_map(self):
         """Loads the current map into the left-side QLabel and scales dynamically."""
