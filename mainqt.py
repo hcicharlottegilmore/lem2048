@@ -177,7 +177,7 @@ class MainWindow(QWidget):
             QLabel("WELCOME\nPress SPACE to continue"),
             #QLabel("DETAILED INSTRUCTIONS\n(Read badly)"),
             #QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner the SPEAKER"),
-            QLabel("DETAILED INSTRUCTIONS\n(Read badly)\nIn this experiment, you are the LISTENER,\nand your partner is the SPEAKER \nYou will be shown a series of maps adjacent to a 2048 game.\nThis game is playable only during select \nportions of the study.\nOtherwise it will be blank.\nYour objective is to successfully complete \nboth the MAP TASK and the GAME TASK. \nPlease press space to continue."),
+            QLabel("DETAILED INSTRUCTIONS\n(Read carefully)\nIn this experiment, you are the LISTENER,\nand your partner is the SPEAKER \nYou will be shown a series of maps adjacent to a 2048 game.\nThis game is playable only during select \nportions of the study.\nOtherwise it will be blank.\nYour objective is to successfully complete \nboth the MAP TASK and the GAME TASK. \nPlease press space to continue."),
             #QLabel("NEW PAGE 1"),  # First additional page (AFTER the instructions, BEFORE 2048)
             QLabel("In the MAP TASK, you will be conversing \nwith your partner, who will give you directions \nto a specified point on the map. \nYou are both given maps of the same locations, \nwith some slight differences. \nYou will need to communicate with your partner \nto understand how to reach the destination point. \nPlease press space to continue. "),
             #QLabel("NEW PAGE 2"),
