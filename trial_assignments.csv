@@ -1,7 +1,7 @@
 trial_index,condition
-0,blind
-1,2048
+0,2048
+1,blind
 2,2048
-3,2048
+3,blind
 4,blind
-5,blind
+5,2048
